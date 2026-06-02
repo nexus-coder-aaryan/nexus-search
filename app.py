@@ -51,7 +51,6 @@ def search_nexus(query):
     query_clean = query.lower().strip()
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
-    # This line searches without caring about uppercase or lowercase!
     cursor.execute("SELECT url, title, content FROM web_pages WHERE LOWER(content) LIKE ? OR LOWER(title) LIKE ?", ('%' + query_clean + '%', '%' + query_clean + '%'))
     rows = cursor.fetchall()
     conn.close()
@@ -102,3 +101,4 @@ if __name__ == '__main__':
     init_db()
     print("Nexus Engine Database Ready.")
     app.run(debug=True, port=5000)
+    
