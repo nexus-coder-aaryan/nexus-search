@@ -35,7 +35,7 @@
 const urlParams = new URLSearchParams(window.location.search);
 if (urlParams.get('admin') !== 'true') {
     document.querySelector('.crawler-admin-panel').style.display = 'none';
-} 
+} ? admin=true
 
         async function performSearch() {
             const query = searchInput.value.trim();
