@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Search</title>
+    <style>
+        @import url('style.css');
+    </style>
+</head>
+<body>
+    <div class="crawler-admin-panel">
+        <input type="text" id="crawl-url-input" placeholder="Paste live web URL here (e.g., https://example.com)">
+        <button id="crawl-btn">Index Site</button>
+        <span id="crawl-status"></span>
+    </div>
+    <div class="search-container" id="search-container">
+        <h1 class="logo">NEXUS</h1>
+        <div class="search-box-wrapper">
+            <input type="text" id="search-input" placeholder="Search the web with Nexus..." autocomplete="off">
+            <button id="search-btn">Search</button>
+        </div>
+        <div id="results-wrapper" class="results-container"></div>
+    </div>
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const searchBtn = document.getElementById('search-btn');
+        const resultsWrapper = document.getElementById('results-wrapper');
+        const searchContainer = document.getElementById('search-container');
+        const crawlUrlInput = document.getElementById('crawl-url-input');
+        const crawlBtn = document.getElementById('crawl-btn');
+        const crawlStatus = document.getElementById('crawl-status');
+
+        async function performSearch() {
+            const query = searchInput.value.trim();
+            if (!query) return;
+            searchContainer.classList.add('results-layout');
+            try {
+                const response = await fetch(`/search?q=${encodeURIComponent(query)}`);
+                const results = await response.json();
+                displayResults(results);
+            } catch (error) {
+                console.error("Error connecting to Nexus:", error);
+            }
+        }
+
+        function displayResults(results) {
+            resultsWrapper.innerHTML = '';
+            if (results.length === 0) {
+                resultsWrapper.innerHTML = `<p class="no-results">No results found for your query.</p>`;
+                return;
+            }
+            results.forEach(item => {
+                const resultItem = document.createElement('div');
+                resultItem.classList.add('result-card');
+                resultItem.innerHTML = `
+                    <span class="result-url">${item.url}</span>
+                    <a href="${item.url}" target="_blank" class="result-title">${item.title}</a>
+                    <p class="result-snippet">${item.content}</p>
+                `;
+                resultsWrapper.appendChild(resultItem);
+            });
+        }
+
+        searchBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') performSearch();
+        });
+
+        crawlBtn.addEventListener('click', async () => {
+            const url = crawlUrlInput.value.trim();
+            if (!url) return;
+            crawlStatus.textContent = "Crawling...";
+            crawlStatus.style.color = "#4facfe";
+            try {
+                const response = await fetch('/crawl', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: url })
+                });
+                const data = await response.json();
+                crawlStatus.textContent = data.message;
+                crawlStatus.style.color = data.success ? "#4fe87a" : "#ff4f5e";
+                if(data.success) crawlUrlInput.value = "";
+            } catch (e) {
+                crawlStatus.textContent = "Error running crawler.";
+                crawlStatus.style.color = "#ff4f5e";
+            }
+        });
+    </script>
+</body>
+</html>
