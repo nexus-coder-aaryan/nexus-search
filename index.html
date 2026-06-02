@@ -29,13 +29,7 @@
         const searchContainer = document.getElementById('search-container');
         const crawlUrlInput = document.getElementById('crawl-url-input');
         const crawlBtn = document.getElementById('crawl-btn');
-        const crawlStatus = document.getElementById('crawl-status');
-
-        // Secret Admin Key Check to hide the crawler from normal users
-const urlParams = new URLSearchParams(window.location.search);
-if (urlParams.get('admin') !== 'true') {
-    document.querySelector('.crawler-admin-panel').style.display = 'none';
-} ? admin=true
+        const crawlStatus = document.getElementById('crawl-status') 
 
         async function performSearch() {
             const query = searchInput.value.trim();
