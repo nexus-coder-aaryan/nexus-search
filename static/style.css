@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', arial, sans-serif;
+}
+body {
+    background-color: #ffffff;
+    color: #202124;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+.crawler-admin-panel {
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #dadce0;
+    font-size: 13px;
+}
+#crawl-url-input {
+    flex: 1;
+    max-width: 350px;
+    border: 1px solid #dadce0;
+    padding: 5px 10px;
+    border-radius: 4px;
+    outline: none;
+}
+#crawl-btn {
+    background-color: #f8f9fa;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.search-container {
+    text-align: center;
+    width: 100%;
+    max-width: 584px;
+    margin-top: 140px;
+    padding: 0 20px;
+}
+.logo {
+    font-size: 5.5rem;
+    font-weight: 500;
+    letter-spacing: -2px;
+    margin-bottom: 25px;
+}
+.logo span.n { color: #4285f4; }
+.logo span.e { color: #ea4335; }
+.logo span.x { color: #fbbc05; }
+.logo span.u { color: #34a853; }
+.logo span.s { color: #ea4335; }
+.search-box-wrapper {
+    display: flex;
+    width: 100%;
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #fff;
+    margin-bottom: 25px;
+}
+#search-input {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+}
+#search-btn {
+    padding: 0 22px;
+    background-color: #f8f9fa;
+    border: none;
+    border-left: 1px solid #dfe1e5;
+    color: #3c4043;
+    font-size: 14px;
+    cursor: pointer;
+}
+.search-container.results-layout {
+    margin-top: 20px;
+    max-width: 750px;
+    align-self: flex-start;
+    margin-left: 150px;
+}
+.search-container.results-layout .logo {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    text-align: left;
+    letter-spacing: -1px;
+}
+.results-container {
+    margin-top: 20px;
+    text-align: left;
+}
+.result-card {
+    margin-bottom: 26px;
+    max-width: 652px;
+}
+.result-url {
+    font-size: 14px;
+    color: #202124;
+    display: block;
+}
+.result-title {
+    font-size: 20px;
+    color: #1a0dab;
+    text-decoration: none;
+}
+.result-snippet {
+    font-size: 14px;
+    color: #4d5156;
+    margin-top: 4px;
+}
